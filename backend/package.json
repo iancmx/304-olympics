@@ -1,0 +1,22 @@
+{
+  "name": "304-olympics",
+  "version": "1.0.0",
+  "description": "304 project backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iancmx/304-olympics.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iancmx/304-olympics/issues"
+  },
+  "homepage": "https://github.com/iancmx/304-olympics#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
