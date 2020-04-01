@@ -28,7 +28,22 @@ const mostGoldMedals = async (req, res) => {
   );
 };
 
+const participateAllSports = async (req, res) => {
+  let query =
+    "SELECT nationality \
+    FROM nationalitycolor NC\
+    WHERE not exists (SELECT S.sport_id FROM sport S\
+                    EXCEPT \
+                    SELECT P.sport_id FROM participant P, athlete A WHERE NC.nationality = P.country and P.participant_id = A.participant_id)"; 
+  console.log(query);
+  await db.query(query, (err, resp) => {
+    if (err) throw err;
+    res.json(resp);
+  });
+};
+
 module.exports = {
   atLeastOneGold,
-  mostGoldMedals
+  mostGoldMedals,
+  participateAllSports
 };

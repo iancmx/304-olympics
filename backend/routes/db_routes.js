@@ -22,5 +22,6 @@ router.post("/sport/newSport", sport.newSport);
 
 router.get("/country/oneGoldMin", country.atLeastOneGold);
 router.get("/country/mostGoldMedals", country.mostGoldMedals);
+router.get("/country/participateAllSports", country.participateAllSports);
 
 module.exports = router;
