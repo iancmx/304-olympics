@@ -33,15 +33,15 @@ CREATE TABLE nationalitycolor (
 
 
 CREATE TABLE sport (
-	sport_id int PRIMARY KEY,
+	sport_id int PRIMARY KEY AUTO_INCREMENT,
 	name varchar(255) NOT NULL
 );
 
 
 CREATE TABLE coach (
 	coach_id int PRIMARY KEY,
-	age int NOT NULL,
 	name varchar(255) NOT NULL,
+	age int NOT NULL,
 	sex varchar(30) NOT NULL,
 	CONSTRAINT check_sex_coach CHECK (sex IN ('Male', 'Female', 'Others', 'N/A')),
 	CONSTRAINT check_age_coach CHECK (age >= 18 AND age <= 110)
