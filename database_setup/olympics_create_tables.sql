@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS olympic;
+USE olympic;
+
 CREATE TABLE medalcount (
 	gold_medal_count int NOT NULL,
 	silver_medal_count int NOT NULL,
