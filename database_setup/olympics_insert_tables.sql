@@ -44,6 +44,7 @@ INSERT INTO sport VALUES (3, 'Volleyball');
 
 INSERT INTO coach VALUES (1, 'William Smith', 45, 'Male');
 INSERT INTO coach VALUES (2, 'Jacob Davis', 50, 'Male');
+INSERT INTO coach VALUES (3, 'Eva Jones', 45, 'Female');
 
 INSERT INTO participant VALUES (1, 'Sophia Jones', 1, 'United-States');
 INSERT INTO participant VALUES (2, 'United-States-Voleyball-Male-Team', 3, 'United-States');
@@ -53,11 +54,27 @@ INSERT INTO participant VALUES (5, 'Aiden Davis', 3, 'United-States');
 INSERT INTO participant VALUES (6, 'Joshua Wilson', 3, 'United-States');
 INSERT INTO participant VALUES (7, 'Liam Miller', 3, 'United-States');
 INSERT INTO participant VALUES (8, 'Andrew Smith', 3, 'United-States');
-
+INSERT INTO participant VALUES (9, 'Grace Wilson' 2, 'United-States');
 
 INSERT INTO mentorship VALUES (1, 1);
 INSERT INTO mentorship VALUES (2, 2);
+INSERT INTO mentorship VALUES (9, 3);
+
+INSERT INTO athlete VALUES(1, 25, 'Female', 56, 180, 0, 0, 0, 1);
+INSERT INTO athlete VALUES(2, 29, 'Male', 75, 181, 0, 0, 0, 3);
+INSERT INTO athlete VALUES(3, 30, 'Male', 78, 185, 0, 0, 0, 4);
+INSERT INTO athlete VALUES(4, 32, 'Male', 68, 175, 0, 0, 0, 5);
+INSERT INTO athlete VALUES(5, 28, 'Male', 85, 190, 0, 0, 0, 6);
+INSERT INTO athlete VALUES(6, 27, 'Male', 68, 176, 0, 0, 0, 7);
+INSERT INTO athlete VALUES(7, 31, 'Male', 73, 182, 0, 0, 0, 8);
+INSERT INTO athlete VALUES(1, 27, 'Female', 55, 177, 0, 0, 0, 9);
 
 INSERT INTO team VALUES (1, 6, 2);
 
-INSERT INTO athlete VALUES()
+INSERT INTO partofteam VALUES (2, 1);
+INSERT INTO partofteam VALUES (3, 1);
+INSERT INTO partofteam VALUES (4, 1);
+INSERT INTO partofteam VALUES (5, 1);
+INSERT INTO partofteam VALUES (6, 1);
+INSERT INTO partofteam VALUES (7, 1);
+INSERT INTO partofteam VALUES (8, 1);
