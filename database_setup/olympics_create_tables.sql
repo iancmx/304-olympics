@@ -20,8 +20,12 @@ CREATE TABLE countrymedal (
 
 CREATE TABLE nationalitycolor (
 	nationality varchar(30) PRIMARY KEY,
-	colour  varchar(30),
-	FOREIGN KEY (nationality) REFERENCES countrymedal(country_name) ON DELETE CASCADE
+	colour_red  int NOT NULL,
+	colour_green int NOT NULL,
+	colour_blue int NOT NULL,
+	FOREIGN KEY (nationality) REFERENCES countrymedal(country_name) ON DELETE CASCADE,
+	CONSTRAINT colour_min CHECK (colour_red >= 0 AND colour_blue >= 0 AND colour_green >= 0),
+	CONSTRAINT colour_max CHECK (colour_red <= 255 AND colour_blue <= 255 AND colour_green <= 255)
 );
 
 
