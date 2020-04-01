@@ -39,7 +39,7 @@ CREATE TABLE sport (
 
 
 CREATE TABLE coach (
-	coach_id int PRIMARY KEY,
+	coach_id int PRIMARY KEY AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	age int NOT NULL,
 	sex varchar(30) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE coach (
 
 
 CREATE TABLE participant (
-	participant_id int PRIMARY KEY,
+	participant_id int PRIMARY KEY AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	sport_id int NOT NULL,
 	country varchar (255),
@@ -67,16 +67,8 @@ CREATE TABLE mentorship (
 );
 
 
-CREATE TABLE team (
-	team_id int PRIMARY KEY,
-	size int NOT NULL,
-	participant_id int NOT NULL,
-	FOREIGN KEY (participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE
-);
-
-
 CREATE TABLE athlete (
-	athlete_id int PRIMARY KEY,
+	athlete_id int PRIMARY KEY AUTO_INCREMENT,
 	age int NOT NULL, 
 	sex varchar(30) NOT NULL,
 	weight double NOT NULL,
@@ -84,7 +76,7 @@ CREATE TABLE athlete (
 	gold_medal_count int,
 	silver_medal_count int,
 	bronze_medal_count int,
-	participant_id int,
+	participant_id int NOT NULL,
 	FOREIGN KEY (participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
 	FOREIGN KEY (gold_medal_count, silver_medal_count, bronze_medal_count) REFERENCES medalcount(gold_medal_count, silver_medal_count, bronze_medal_count) ON DELETE CASCADE,
 	CONSTRAINT check_sex_athlete CHECK (sex IN ('Male', 'Female', 'Others', 'N/A')),
@@ -92,12 +84,11 @@ CREATE TABLE athlete (
 );
 
 
-CREATE TABLE sportevent (
-	event_id  int PRIMARY KEY,
-	name varchar(255) UNIQUE NOT NULL,
-	date Date NOT NULL,
-	sport_id int NOT NULL,
-	FOREIGN KEY (sport_id) REFERENCES sport(sport_id) ON DELETE CASCADE
+CREATE TABLE team (
+	team_id int PRIMARY KEY AUTO_INCREMENT,
+	size int NOT NULL,
+	participant_id int NOT NULL,
+	FOREIGN KEY (participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE
 );
 
 
@@ -107,6 +98,15 @@ CREATE TABLE partofteam(
 	PRIMARY KEY(athlete_id, team_id),
 	FOREIGN KEY(athlete_id) REFERENCES athlete(athlete_id) ON DELETE CASCADE,
 	FOREIGN KEY(team_id) REFERENCES team(team_id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE sportevent (
+	event_id  int PRIMARY KEY AUTO_INCREMENT,
+	name varchar(255) UNIQUE NOT NULL,
+	date Date NOT NULL,
+	sport_id int NOT NULL,
+	FOREIGN KEY (sport_id) REFERENCES sport(sport_id) ON DELETE CASCADE
 );
 	
 
@@ -120,7 +120,7 @@ CREATE TABLE venue (
 
 
 CREATE TABLE eventresults (
-	result_id int PRIMARY KEY,
+	result_id int PRIMARY KEY AUTO_INCREMENT,
 	description varchar(255) NOT NULL,
 	participant_id int NOT NULL,
 	event_id int NOT NULL,
@@ -141,7 +141,7 @@ CREATE TABLE participatesinevent (
 
 
 CREATE TABLE user (
-	user_id int PRIMARY KEY,
+	user_id int PRIMARY KEY AUTO_INCREMENT,
 	login varchar(25) NOT NULL,
 	password varchar(25) NOT NULL,
 	permission boolean
