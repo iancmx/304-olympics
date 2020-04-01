@@ -18,6 +18,13 @@ CREATE TABLE countrymedal (
 );
 
 
+CREATE TABLE nationalitycolor (
+	nationality varchar(30) PRIMARY KEY,
+	colour  varchar(30),
+	FOREIGN KEY (nationality) REFERENCES countrymedal(country_name)
+);
+
+
 CREATE TABLE sport (
 	sport_id int PRIMARY KEY,
 	name varchar(255) NOT NULL
@@ -39,7 +46,7 @@ CREATE TABLE participant (
 	name varchar(255) NOT NULL,
 	sport_id int NOT NULL,
 	country varchar (255),
-	FOREIGN KEY (country) REFERENCES countrymedal(country_name),
+	FOREIGN KEY (country) REFERENCES  nationalitycolor(nationality),
 	FOREIGN KEY (sport_id) REFERENCES sport(sport_id)
 ); 
 
@@ -55,18 +62,9 @@ CREATE TABLE mentorship (
 
 CREATE TABLE team (
 	team_id int PRIMARY KEY,
-	nationality varchar(30),
 	size int NOT NULL,
 	participant_id int NOT NULL,
-	FOREIGN KEY (participant_id) REFERENCES participant(participant_id),
-	FOREIGN KEY (nationality) REFERENCES participant(country)
-);
-
-
-CREATE TABLE nationalitycolor (
-	nationality varchar(30) PRIMARY KEY,
-	colour  varchar(30),
-	FOREIGN KEY (nationality) REFERENCES participant(country)
+	FOREIGN KEY (participant_id) REFERENCES participant(participant_id)
 );
 
 
