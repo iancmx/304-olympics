@@ -14,14 +14,14 @@ CREATE TABLE countrymedal (
 	gold_medal_count int NOT NULL,
 	silver_medal_count int NOT NULL,
 	bronze_medal_count int NOT NULL,
-	FOREIGN KEY (gold_medal_count, silver_medal_count, bronze_medal_count) REFERENCES medalcount(gold_medal_count, silver_medal_count, bronze_medal_count)
+	FOREIGN KEY (gold_medal_count, silver_medal_count, bronze_medal_count) REFERENCES medalcount(gold_medal_count, silver_medal_count, bronze_medal_count) ON DELETE CASCADE
 );
 
 
 CREATE TABLE nationalitycolor (
 	nationality varchar(30) PRIMARY KEY,
 	colour  varchar(30),
-	FOREIGN KEY (nationality) REFERENCES countrymedal(country_name)
+	FOREIGN KEY (nationality) REFERENCES countrymedal(country_name) ON DELETE CASCADE
 );
 
 
@@ -46,8 +46,8 @@ CREATE TABLE participant (
 	name varchar(255) NOT NULL,
 	sport_id int NOT NULL,
 	country varchar (255),
-	FOREIGN KEY (country) REFERENCES  nationalitycolor(nationality),
-	FOREIGN KEY (sport_id) REFERENCES sport(sport_id)
+	FOREIGN KEY (country) REFERENCES  nationalitycolor(nationality) ON DELETE CASCADE,
+	FOREIGN KEY (sport_id) REFERENCES sport(sport_id) ON DELETE CASCADE
 ); 
 
 
@@ -55,8 +55,8 @@ CREATE TABLE mentorship (
 	participant_id int NOT NULL,
 	coach_id int NOT NULL,
 	PRIMARY KEY (participant_id, coach_id),
-	FOREIGN KEY(participant_id) REFERENCES participant(participant_id),
-	FOREIGN KEY(coach_id) REFERENCES coach(coach_id)
+	FOREIGN KEY(participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
+	FOREIGN KEY(coach_id) REFERENCES coach(coach_id) ON DELETE CASCADE
 );
 
 
@@ -64,7 +64,7 @@ CREATE TABLE team (
 	team_id int PRIMARY KEY,
 	size int NOT NULL,
 	participant_id int NOT NULL,
-	FOREIGN KEY (participant_id) REFERENCES participant(participant_id)
+	FOREIGN KEY (participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE
 );
 
 
@@ -78,8 +78,8 @@ CREATE TABLE athlete (
 	silver_medal_count int,
 	bronze_medal_count int,
 	participant_id int,
-	FOREIGN KEY (participant_id) REFERENCES participant(participant_id),
-	FOREIGN KEY (gold_medal_count, silver_medal_count, bronze_medal_count) REFERENCES medalcount(gold_medal_count, silver_medal_count, bronze_medal_count),
+	FOREIGN KEY (participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
+	FOREIGN KEY (gold_medal_count, silver_medal_count, bronze_medal_count) REFERENCES medalcount(gold_medal_count, silver_medal_count, bronze_medal_count) ON DELETE CASCADE,
 	CONSTRAINT check_sex_athlete CHECK (sex IN ('Male', 'Female', 'Others', 'N/A')),
 	CONSTRAINT check_age_athlete CHECK (age >= 18 AND age <= 110)
 );
@@ -90,7 +90,7 @@ CREATE TABLE sportevent (
 	name varchar(255) UNIQUE NOT NULL,
 	date Date NOT NULL,
 	sport_id int NOT NULL,
-	FOREIGN KEY (sport_id) REFERENCES sport(sport_id)
+	FOREIGN KEY (sport_id) REFERENCES sport(sport_id) ON DELETE CASCADE
 );
 
 
@@ -98,8 +98,8 @@ CREATE TABLE partofteam(
 	athlete_id int NOT NULL,
 	team_id int NOT NULL,
 	PRIMARY KEY(athlete_id, team_id),
-	FOREIGN KEY(athlete_id) REFERENCES athlete(athlete_id),
-	FOREIGN KEY(team_id) REFERENCES team(team_id)
+	FOREIGN KEY(athlete_id) REFERENCES athlete(athlete_id) ON DELETE CASCADE,
+	FOREIGN KEY(team_id) REFERENCES team(team_id) ON DELETE CASCADE
 );
 	
 
@@ -117,8 +117,8 @@ CREATE TABLE eventresults (
 	description varchar(255) NOT NULL,
 	participant_id int NOT NULL,
 	event_id int NOT NULL,
-	FOREIGN KEY(participant_id) REFERENCES participant(participant_id),
-	FOREIGN KEY(event_id) REFERENCES sportevent(event_id),
+	FOREIGN KEY(participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
+	FOREIGN KEY(event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE,
 	CONSTRAINT event_result_description CHECK (description IN ('Won', 'Lost', 'Draw', 'Disqualified', 'Qualified', 'Not Qualified', 'Withdrew', 'Not Available'))
 );
 
@@ -127,8 +127,8 @@ CREATE TABLE participatesinevent (
 	participant_id int NOT NULL,
 	event_id int NOT NULL,
 	PRIMARY KEY (participant_id, event_id),
-	FOREIGN KEY(participant_id) REFERENCES participant(participant_id),
-	FOREIGN KEY(event_id) REFERENCES sportevent(event_id)
+	FOREIGN KEY(participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
+	FOREIGN KEY(event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE
 
 );
 
