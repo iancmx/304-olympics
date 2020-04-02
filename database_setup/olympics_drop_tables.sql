@@ -7,6 +7,7 @@ drop table if exists sportevent cascade;
 drop table if exists athlete cascade;
 drop table if exists team cascade;
 drop table if exists mentorship cascade;
+drop table if exists participantsport cascade;
 drop table if exists participant cascade;
 drop table if exists coach cascade;
 drop table if exists sport cascade;

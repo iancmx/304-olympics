@@ -51,11 +51,17 @@ CREATE TABLE coach (
 CREATE TABLE participant (
 	participant_id int PRIMARY KEY AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
-	sport_id int NOT NULL,
 	country varchar (255),
-	FOREIGN KEY (country) REFERENCES  nationalitycolor(nationality) ON DELETE CASCADE,
-	FOREIGN KEY (sport_id) REFERENCES sport(sport_id) ON DELETE CASCADE
+	FOREIGN KEY (country) REFERENCES  nationalitycolor(nationality) ON DELETE CASCADE
 ); 
+
+CREATE TABLE participantsport (
+	participant_id int NOT NULL,
+	sport_id int NOT NULL,
+	PRIMARY KEY (participant_id, sport_id),
+	FOREIGN KEY (participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
+	FOREIGN KEY (sport_id) REFERENCES sport(sport_id) ON DELETE CASCADE
+);
 
 
 CREATE TABLE mentorship (
