@@ -3,7 +3,7 @@ const db = require("../../db");
 
 const nationalities = async (req, res) => {
   db.query(
-    "SELECT name, country FROM participant GROUP BY country",
+    "SELECT name, country FROM participant",
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
