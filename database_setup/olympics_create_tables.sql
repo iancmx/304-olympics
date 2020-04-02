@@ -112,31 +112,30 @@ CREATE TABLE sportevent (
 
 CREATE TABLE venue (
 	city varchar(25) NOT NULL,
-	Street varchar(25) NOT NULL,
+	street varchar(25) NOT NULL,
 	zip_code varchar(25) NOT NULL,	
 	name varchar(25) NOT NULL,
 	PRIMARY KEY(city, street, zip_code) 
 );
 
-
-CREATE TABLE eventresults (
-	result_id int PRIMARY KEY AUTO_INCREMENT,
-	description varchar(255) NOT NULL,
-	participant_id int NOT NULL,
+CREATE TABLE eventvenue (
+	city varchar(25) NOT NULL,
+	street varchar(25) NOT NULL,
+	zip_code varchar(25) NOT NULL,
 	event_id int NOT NULL,
-	FOREIGN KEY(participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
-	FOREIGN KEY(event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE,
-	CONSTRAINT event_result_description CHECK (description IN ('Won', 'Lost', 'Draw', 'Disqualified', 'Qualified', 'Not Qualified', 'Withdrew', 'Not Available'))
+	PRIMARY KEY(city, street, zip_code, event_id),
+	FOREIGN KEY (city, street, zip_code) REFERENCES venue(city, street, zip_code) ON DELETE CASCADE,
+	FOREIGN KEY (event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE
 );
-
 
 CREATE TABLE participatesinevent (
 	participant_id int NOT NULL,
 	event_id int NOT NULL,
+	result_description varchar(255) NOT NULL,
 	PRIMARY KEY (participant_id, event_id),
 	FOREIGN KEY(participant_id) REFERENCES participant(participant_id) ON DELETE CASCADE,
-	FOREIGN KEY(event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE
-
+	FOREIGN KEY(event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE,	
+	CONSTRAINT event_result_description CHECK (result_description IN ('Won', 'Lost', 'Draw', 'Disqualified', 'Qualified', 'Not Qualified', 'Withdrew', 'Not Available'))
 );
 
 
