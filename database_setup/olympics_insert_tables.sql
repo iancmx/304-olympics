@@ -117,7 +117,7 @@ INSERT INTO participantsport VALUES (16, 3);
 INSERT INTO participantsport VALUES (17, 1);
 INSERT INTO participantsport VALUES (18, 2);
 INSERT INTO participantsport VALUES (14, 1);
-INSERT INTO participantspoert VALUES (14, 2);
+INSERT INTO participantsport VALUES (14, 2);
 
 INSERT INTO mentorship VALUES (10, 6);
 INSERT INTO mentorship VALUES (14, 9);

@@ -5,7 +5,8 @@ const atLeastOneGold = async (req, res) => {
   let query =
     "SELECT country_name, gold_medal_count \
     FROM countrymedal \
-    WHERE gold_medal_count > 0";
+    WHERE gold_medal_count > 0 \
+    ORDER BY country_name asc";
 
   console.log(query);
   await db.query(query, (err, resp) => {
@@ -20,7 +21,8 @@ const mostGoldMedals = async (req, res) => {
     FROM countrymedal \
     WHERE gold_medal_count = (\
         SELECT MAX(C.gold_medal_count) \
-        FROM countrymedal C)",
+        FROM countrymedal C)\
+    ORDER BY country_name asc",
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
@@ -30,12 +32,12 @@ const mostGoldMedals = async (req, res) => {
 
 const participateAllSports = async (req, res) => {
   let query =
-    "
-    SELECT nationality \
+    "SELECT nationality \
     FROM nationalitycolor NC \
     WHERE not exists (SELECT S.sport_id FROM sport S WHERE S.sport_id NOT IN( \
               SELECT PS.sport_id FROM participant P, athlete A, participantsport PS \
-                        WHERE NC.nationality = P.country and P.participant_id = PS.participant_id and P.participant_id = A.participant_id))"; 
+                        WHERE NC.nationality = P.country and P.participant_id = PS.participant_id and P.participant_id = A.participant_id))\
+    ORDER BY nationality asc"; 
   console.log(query);
   await db.query(query, (err, resp) => {
     if (err) throw err;
