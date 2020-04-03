@@ -3,7 +3,6 @@ const db = require("../../db");
 
 const newAthlete = async (req, res) => {
   const {
-    athlete_id,
     age,
     sex,
     weight,
@@ -15,22 +14,11 @@ const newAthlete = async (req, res) => {
   } = req.body || {};
 
   let insertQuery =
-    "INSERT INTO athlete (athlete_id, age, sex, weight, height, gold_medal_count, silver_medal_count, bronze_medal_count, participant_id) VALUES (65, '??', '??', '??', '??', '??', '??', '??', '??')";
-  let query = mysql.format(insertQuery, [
-    athlete_id,
-    age,
-    sex,
-    weight,
-    height,
-    gold_medal_count,
-    silver_medal_count,
-    bronze_medal_count,
-    participant_id
-  ]);
+    `INSERT INTO athlete (age, sex, weight, height, gold_medal_count, silver_medal_count, bronze_medal_count, participant_id) VALUES (${age}, '${sex}', ${weight}, ${height}, ${gold_medal_count}, ${silver_medal_count}, ${bronze_medal_count}, ${participant_id})`;
 
-  console.log(query);
+  console.log(insertQuery);
 
-  db.query(query, (err, res) => {
+  db.query(insertQuery, (err, res) => {
     if (err) throw err;
     res.json(res.insertId);
   });

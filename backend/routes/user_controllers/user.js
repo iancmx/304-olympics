@@ -39,15 +39,14 @@ const handleRegister = async (req, res) => {
 
   let query = mysql.format(insertQuery, [
 	login,
-	password,
-	final_perm
+	password
   ]);
 
   console.log(query)
   
-  db.query(query, (err, res) => {
+  db.query(query, (err, response) => {
     if (err) throw err;
-    res.json(res.insertId);
+    res.json(response.insertId);
   });
 
 };
