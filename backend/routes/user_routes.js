@@ -3,13 +3,10 @@ const router = express.Router();
 
 
 // Controllers
-const register = require("./user_controllers/register");
-const login =  require("./user_controllers/login");
-// const getProfile = require("../controllers/getProfile");
-// const logout = require("../controllers/logout");
+const user = require("./user_controllers/user");
 
-router.post("/register", register.handleRegister);
-router.post("/login", login.handleLogin);
+router.post("/register", user.handleRegister);
+router.post("/login", user.handleLogin);
 // router.put("/updateProfile", updateProfile.handleProfileUpdate);
 // router.get("/getProfile", getProfile.handleGetProfile);
 // router.post("/logout", logout.handleLogout);
