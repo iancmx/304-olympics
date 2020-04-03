@@ -14,10 +14,11 @@ const nationalities = async (req, res) => {
 const hatachiSport = async (req, res) => {
   db.query(
     "SELECT P.name, A.age, S.name, P.country \
-    FROM participant P, athlete A, sport S \
-    WHERE P.participant = A.participant_id \
-    and P.sport_id = S.sport_id \
-    and A.age >= 20 and A.age >= 30",
+    FROM participant P, participantsport PS, athlete A, sport S \
+    WHERE PS.participant_id = A.participant_id \
+    and PS.participant_id = P.participant_id \
+    and PS.sport_id = S.sport_id \
+    and A.age >= 20 and A.age <= 30",
     (err, result, fields) => {
         if (err) throw err;
         res.json(result);
