@@ -10,7 +10,6 @@ const newAthlete = async (req, res) => {
     gold_medal_count,
     silver_medal_count,
     bronze_medal_count,
-    participant_id,
     name,
     country,
   } = req.body || {};
