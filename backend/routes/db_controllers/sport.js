@@ -31,8 +31,17 @@ const getInfo = async (req, res) => {
   );
 };
 
+const deleteSport = async (req, res) => {
+    db.query(`DELETE FROM sport WHERE sport_id = ${req.params.id}`, (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  
+  };
+
 module.exports = {
   newSport,
   allSports,
-  getInfo
+  getInfo,
+  deleteSport
 };

@@ -60,10 +60,19 @@ const getInfo = async (req, res) => {
   });
 };
 
+const deleteCountry = async (req, res) => {
+  db.query(`DELETE FROM countrymedal WHERE country_name = '${req.params.name}'`, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+
+};
+
 module.exports = {
   atLeastOneGold,
   mostGoldMedals,
   participateAllSports,
   allCountries,
-  getInfo
+  getInfo,
+  deleteCountry
 };

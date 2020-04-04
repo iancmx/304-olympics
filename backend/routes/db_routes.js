@@ -19,15 +19,19 @@ router.get("/participant/getCountries", participant.nationalities);
 router.get("/participant/hatachiSport", participant.hatachiSport);
 router.get("/participant/", participant.allParticipants);
 router.get("/participant/:id", participant.getInfo);
+router.delete("/participant/delete/:id", participant.deleteParticipant);
 
 router.post("/sport/newSport", sport.newSport);
 router.get("/sport", sport.allSports);
 router.get("/sport/:id", sport.getInfo);
+router.delete("/sport/delete/:id", sport.deleteSport);
+
 
 router.get("/country/oneGoldMin", country.atLeastOneGold);
 router.get("/country/mostGoldMedals", country.mostGoldMedals);
 router.get("/country/participateAllSports", country.participateAllSports);
 router.get("/country", country.allCountries);
 router.get("/country/:name", country.getInfo);
+router.delete("/country/delete/:name", country.deleteCountry);
 
 module.exports = router;
