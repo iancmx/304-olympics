@@ -41,7 +41,28 @@ export class Register extends React.Component  {
 		} else if (password != confirmPassword) {
 			alert("Your password confirmation does not match!");
 		} else {
-			alert("Hello " + username + "! Your passoword is " + password+ "!");
+			fetch('http://localhost:3001/user/register', {
+				method: 'post',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					login: username,
+					password: password,
+					permission: false,
+				})
+			})
+			.then(response => 
+    			response.json().then(data => ({
+        			data: data,
+        			status: response.status,
+    			}))
+			).then(res => {
+    			console.log(res.status, res.data);
+    			var data = {user_id: res.data};
+    			if(res.data){
+    				this.props.handleSuccessfulAuthentication(data);
+    			}
+			})
+			.catch(error => {console.log(error)});
 		}
 	}
 

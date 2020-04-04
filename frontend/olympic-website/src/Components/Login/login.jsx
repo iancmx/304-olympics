@@ -50,7 +50,7 @@ export class Login extends React.Component {
     				this.props.handleSuccessfulAuthentication(data);
     			}
 			})
-			.catch(error => {console.log(error)}, );
+			.catch(error => {console.log(error)});
 		}
 	}
 
