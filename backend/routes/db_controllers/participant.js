@@ -37,9 +37,18 @@ const getInfo = async (req, res) => {
   });
 };
 
+const deleteParticipant = async (req, res) => {
+  db.query(`DELETE FROM participant WHERE participant_id = ${req.params.id}`, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+
+};
+
 module.exports = {
   nationalities,
   hatachiSport,
   allParticipants,
-  getInfo
+  getInfo,
+  deleteParticipant
 };
