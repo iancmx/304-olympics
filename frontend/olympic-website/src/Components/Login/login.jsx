@@ -1,6 +1,5 @@
 import React from "react";
 import loginImg from "../../login.svg";
-import axios from 'axios';
 
 export class Login extends React.Component  {
 
@@ -32,19 +31,16 @@ export class Login extends React.Component  {
 		} else if (!password) {
 			alert("Please enter your password!");
 		} else {
-
-			axios.post(
-				'http://localhost:3001/user/login',
-				{login: username, password:password},
-				{ withCredentials: true }
-			)
-			.then(function (response) {
-   	 			console.log(response);
-  			})
-  			.catch(function (error) {
-    			console.log(error);
-  			});
-
+			fetch('http://localhost:3001/user/login', {
+				method: 'post',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					username: username,
+					password: password
+				})
+			})
+			.then(response => {console.log(response.json())})
+			.catch(error => {console.log(error)});
 		}
 	}
 
