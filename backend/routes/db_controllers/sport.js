@@ -32,16 +32,32 @@ const getInfo = async (req, res) => {
 };
 
 const deleteSport = async (req, res) => {
-    db.query(`DELETE FROM sport WHERE sport_id = ${req.params.id}`, (err, result, fields) => {
+  db.query(
+    `DELETE FROM sport WHERE sport_id = ${req.params.id}`,
+    (err, result, fields) => {
       if (err) throw err;
       res.json(result);
-    });
-  
-  };
+    }
+  );
+};
+
+const updateSport = async (req, res) => {
+  const { sport_id, sport } = req.body;
+
+  let updateQuery = `UPDATE sport SET name = '${sport}' WHERE sport_id = ${sport_id}`;
+
+  console.log(updateQuery);
+
+  db.query(updateQuery, (err, resp) => {
+    if (err) throw err;
+    res.json(resp.insertId);
+  });
+};
 
 module.exports = {
   newSport,
   allSports,
   getInfo,
-  deleteSport
+  deleteSport,
+  updateSport
 };

@@ -11,6 +11,8 @@ const newAthlete = async (req, res) => {
     silver_medal_count,
     bronze_medal_count,
     participant_id,
+    name,
+    country
   } = req.body || {};
 
   const sum =
@@ -32,13 +34,15 @@ AND bronze_medal_count = ${bronze_medal_count} `,
           if (err) throw err;
         });
       }
-      let insertQuery = `INSERT INTO athlete (age, sex, weight, height, gold_medal_count, silver_medal_count, bronze_medal_count, participant_id) VALUES (${age}, "${sex}", ${weight}, ${height}, ${gold_medal_count}, ${silver_medal_count}, ${bronze_medal_count}, ${participant_id})`;
 
-      console.log(insertQuery);
-
-      db.query(insertQuery, (err, resp) => {
+      let insertQuery1 = `INSERT INTO participant (name, country) VALUES ('${name}', '${country}')`;
+      db.query(insertQuery1, (err, result) => {
         if (err) throw err;
-        res.json(resp.insertId);
+        let insertQuery2 = `INSERT INTO athlete (age, sex, weight, height, gold_medal_count, silver_medal_count, bronze_medal_count, participant_id) VALUES (${age}, "${sex}", ${weight}, ${height}, ${gold_medal_count}, ${silver_medal_count}, ${bronze_medal_count}, ${result.insertId})`;
+        db.query(insertQuery2, (err, resp) => {
+          if (err) throw err;
+          res.json(resp.insertId);
+        });
       });
     }
   );

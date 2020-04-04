@@ -25,6 +25,7 @@ router.post("/sport/newSport", sport.newSport);
 router.get("/sport", sport.allSports);
 router.get("/sport/:id", sport.getInfo);
 router.delete("/sport/delete/:id", sport.deleteSport);
+router.put("/sport/update", sport.updateSport);
 
 
 router.get("/country/oneGoldMin", country.atLeastOneGold);
