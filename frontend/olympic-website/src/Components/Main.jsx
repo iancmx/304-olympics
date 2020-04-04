@@ -28,7 +28,8 @@ export default class Main extends React.Component {
       gold_medal_count: "",
       silver_medal_count: "",
       bronze_medal_count: "",
-      participant_id: "",
+      name: "",
+      country: "",
     };
     this.ageChange = this.ageChange.bind(this);
     this.sexChange = this.sexChange.bind(this);
@@ -37,7 +38,8 @@ export default class Main extends React.Component {
     this.goldMedalChange = this.goldMedalChange.bind(this);
     this.silverMedalChange = this.silverMedalChange.bind(this);
     this.bronzeMedalChange = this.bronzeMedalChange.bind(this);
-    this.participant_idChange = this.participant_idChange.bind(this);
+    this.nameChange = this.nameChange.bind(this);
+    this.countryChange = this.countryChange.bind(this);
   }
   queryHandler = (query) => {
     console.log(query);
@@ -337,19 +339,52 @@ export default class Main extends React.Component {
   bronzeMedalChange(event) {
     this.setState({ bronze_medal_count: event.target.value });
   }
-  participant_idChange(event) {
-    this.setState({ participant_id: event.target.value });
+  nameChange(event) {
+    this.setState({ name: event.target.value });
+  }
+  countryChange(event) {
+    this.setState({ country: event.target.value });
+  }
+  isEmpty(value) {
+    return value == null || value.length === 0;
   }
   insertAthlete() {
+    var {
+      age,
+      sex,
+      height,
+      weight,
+      gold_medal_count,
+      silver_medal_count,
+      bronze_medal_count,
+      name,
+      country,
+    } = this.state;
+    if (
+      this.isEmpty(age) ||
+      this.isEmpty(sex) ||
+      this.isEmpty(height) ||
+      this.isEmpty(weight) ||
+      this.isEmpty(gold_medal_count) ||
+      this.isEmpty(bronze_medal_count) ||
+      this.isEmpty(silver_medal_count) ||
+      this.isEmpty(name) ||
+      this.isEmpty(country)
+    ) {
+      console.log("Not Fill in enough Infor");
+      console.log(gold_medal_count, silver_medal_count, bronze_medal_count);
+      return;
+    }
     let newPost = {
-      age: this.state.age,
-      sex: this.state.sex,
-      height: this.state.height,
-      weight: this.state.weight,
-      gold_medal_count: this.state.gold_medal_count,
-      silver_medal_count: this.state.silver_medal_count,
-      bronze_medal_count: this.state.bronze_medal_count,
-      participant_id: this.state.participant_id,
+      age: age,
+      sex: sex,
+      height: height,
+      weight: weight,
+      gold_medal_count: gold_medal_count,
+      silver_medal_count: silver_medal_count,
+      bronze_medal_count: bronze_medal_count,
+      name: name,
+      country: country,
     };
     fetch("http://localhost:3001/db/athlete/newAthlete", {
       method: "post",
@@ -438,7 +473,7 @@ export default class Main extends React.Component {
               type="text"
               name="gold"
               placeholder="number"
-              onChange={this.gold_medal_count}
+              onChange={this.goldMedalChange}
             />
           </div>
           <div className="form-group">
@@ -460,12 +495,21 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">participant ID</label>
+            <label htmlFor="none">Name</label>
             <input
               type="text"
               name="id"
-              placeholder="number"
-              onChange={this.participant_idChange}
+              placeholder="Athelete Name"
+              onChange={this.nameChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">Country</label>
+            <input
+              type="text"
+              name="id"
+              placeholder="Nationality"
+              onChange={this.countryChange}
             />
           </div>
           <button
