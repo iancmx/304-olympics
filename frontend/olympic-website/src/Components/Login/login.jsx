@@ -21,28 +21,31 @@ export class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  handleSubmit() {
+    const username = this.state.username;
+    const password = this.state.password;
 
-	handleSubmit(){
-		const username = this.state.username;
-		const password = this.state.password;
-
-		if (!username) {
-			alert("Please enter your username!");
-		} else if (!password) {
-			alert("Please enter your password!");
-		} else {
-			fetch('http://localhost:3001/user/login', {
-				method: 'post',
-				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({
-					username: username,
-					password: password
-				})
-			})
-			.then(response => {console.log(response.json())})
-			.catch(error => {console.log(error)});
-		}
-	}`
+    if (!username) {
+      alert("Please enter your username!");
+    } else if (!password) {
+      alert("Please enter your password!");
+    } else {
+      fetch("http://localhost:3001/user/login", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      })
+        .then((response) => {
+          console.log(response.json());
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
 
   render() {
     return (
