@@ -12,7 +12,7 @@ const newAthlete = async (req, res) => {
     bronze_medal_count,
     participant_id,
     name,
-    country
+    country,
   } = req.body || {};
 
   const sum =
@@ -90,23 +90,26 @@ AND bronze_medal_count = ${bronze_medal_count} `,
       });
     }
   );
-
 };
 
 const deleteAthlete = async (req, res) => {
-  db.query(`DELETE FROM athlete WHERE athlete_id = ${req.params.id}`, (err, result, fields) => {
-    if (err) throw err;
-    res.json(result);
-  });
-
+  db.query(
+    `DELETE FROM athlete WHERE athlete_id = ${req.params.id}`,
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
 };
 
 const getInfo = async (req, res) => {
-
-  db.query(`SELECT * FROM athlete WHERE athlete_id = ${req.params.id}`, (err, result, fields) => {
-    if (err) throw err;
-    res.json(result);
-  });
+  db.query(
+    `SELECT * FROM athlete WHERE athlete_id = ${req.params.id}`,
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
 };
 
 const allAthletes = async (req, res) => {
@@ -118,7 +121,7 @@ const allAthletes = async (req, res) => {
 
 const numAthleteAgeCountry = async (req, res) => {
   db.query(
-    "SELECT P.country AS country, COUNT(*) AS number_of_athletes, AVG(A.age)AS average FROM athlete A, participant P WHERE A.participant_id = P.participant_id  GROUP BY P.country;",
+    "SELECT P.country AS country, COUNT(*) AS number_of_athletes, AVG(A.age) AS average FROM athlete A, participant P WHERE A.participant_id = P.participant_id  GROUP BY P.country",
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
@@ -132,5 +135,5 @@ module.exports = {
   deleteAthlete,
   getInfo,
   allAthletes,
-  numAthleteAgeCountry,
+  numAthleteAgeCountry
 };

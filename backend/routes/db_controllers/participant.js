@@ -8,14 +8,17 @@ const nationalities = async (req, res) => {
   });
 };
 
-const hatachiSport = async (req, res) => {
+const ageBetweenSport = async (req, res) => {
+
+  const { minage, maxage } = req.body;
+
   db.query(
-    "SELECT P.name AS name, A.age AS age, S.name AS sport, P.country AS country \
+    `SELECT P.name AS name, A.age AS age, S.name AS sport, P.country AS country \
     FROM participant P, participantsport PS, athlete A, sport S \
     WHERE PS.participant_id = A.participant_id \
     and PS.participant_id = P.participant_id \
     and PS.sport_id = S.sport_id \
-    and A.age >= 20 and A.age <= 30",
+    and A.age >= ${minage} and A.age <= ${maxage}`,
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
@@ -47,7 +50,7 @@ const deleteParticipant = async (req, res) => {
 
 module.exports = {
   nationalities,
-  hatachiSport,
+  ageBetweenSport,
   allParticipants,
   getInfo,
   deleteParticipant

@@ -30,6 +30,36 @@ const mostGoldMedals = async (req, res) => {
   );
 };
 
+const mostSilverMedals = async (req, res) => {
+  db.query(
+    "SELECT country_name, silver_medal_count \
+    FROM countrymedal \
+    WHERE silver_medal_count = (\
+        SELECT MAX(C.silver_medal_count) \
+        FROM countrymedal C)\
+    ORDER BY country_name asc",
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+};
+
+const mostBronzeMedals = async (req, res) => {
+  db.query(
+    "SELECT country_name, bronze_medal_count \
+    FROM countrymedal \
+    WHERE bronze_medal_count = (\
+        SELECT MAX(C.bronze_medal_count) \
+        FROM countrymedal C)\
+    ORDER BY country_name asc",
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+};
+
 const participateAllSports = async (req, res) => {
   let query =
     "SELECT nationality \
@@ -71,6 +101,8 @@ const deleteCountry = async (req, res) => {
 module.exports = {
   atLeastOneGold,
   mostGoldMedals,
+  mostSilverMedals,
+  mostBronzeMedals,
   participateAllSports,
   allCountries,
   getInfo,
