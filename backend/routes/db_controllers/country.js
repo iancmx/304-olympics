@@ -45,8 +45,25 @@ const participateAllSports = async (req, res) => {
   });
 };
 
+const allCountries = async (req, res) => {
+  db.query("SELECT * FROM countrymedal", (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
+const getInfo = async (req, res) => {
+
+  db.query(`SELECT * FROM countrymedal WHERE country_name = '${req.params.name}'`, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
 module.exports = {
   atLeastOneGold,
   mostGoldMedals,
   participateAllSports,
+  allCountries,
+  getInfo
 };

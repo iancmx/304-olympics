@@ -23,7 +23,23 @@ const hatachiSport = async (req, res) => {
   );
 };
 
+const allParticipants = (req, res) => {
+  db.query("SELECT * FROM participant", (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+}
+
+const getInfo = async (req, res) => {
+  db.query(`SELECT * FROM participant WHERE participant_id = ${req.params.id}`, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
 module.exports = {
   nationalities,
   hatachiSport,
+  allParticipants,
+  getInfo
 };
