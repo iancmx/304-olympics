@@ -30,6 +30,7 @@ export default class Main extends React.Component {
       bronze_medal_count: "",
       name: "",
       country: "",
+      athlete_id: "",
     };
     this.ageChange = this.ageChange.bind(this);
     this.sexChange = this.sexChange.bind(this);
@@ -40,6 +41,7 @@ export default class Main extends React.Component {
     this.bronzeMedalChange = this.bronzeMedalChange.bind(this);
     this.nameChange = this.nameChange.bind(this);
     this.countryChange = this.countryChange.bind(this);
+    this.athleteIdChange = this.athleteIdChange.bind(this);
   }
   queryHandler = (query) => {
     console.log(query);
@@ -345,6 +347,9 @@ export default class Main extends React.Component {
   countryChange(event) {
     this.setState({ country: event.target.value });
   }
+  athleteIdChange(event) {
+    this.setState({ athlete_id: event.target.value });
+  }
   isEmpty(value) {
     return value == null || value.length === 0;
   }
@@ -398,7 +403,20 @@ export default class Main extends React.Component {
         console.log("post request response data", data);
       });
   }
-  deleteAthlete() {}
+  deleteAthlete() {
+    let url =
+      "http://localhost:3001/db/athlete/delete/" + this.state.athlete_id;
+    fetch(url, {
+      method: "delete",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log("delete request response data", data);
+      });
+  }
   render() {
     // if (this.props.loggedInStatus === "NOT_LOGGED_IN")
     //   return (
@@ -518,8 +536,17 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.insertAthlete()}
           >
-            INSERT
+            ADD
           </button>
+          <div className="form-group">
+            <label htmlFor="none">Delete Athlete with this ID</label>
+            <input
+              type="text"
+              name="id"
+              placeholder="Athelete ID number"
+              onChange={this.athleteIdChange}
+            />
+          </div>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
