@@ -417,6 +417,59 @@ export default class Main extends React.Component {
         console.log("delete request response data", data);
       });
   }
+  updateAthlete() {
+    var {
+      athlete_id,
+      age,
+      sex,
+      height,
+      weight,
+      gold_medal_count,
+      silver_medal_count,
+      bronze_medal_count,
+      name,
+      country,
+    } = this.state;
+    if (
+      this.isEmpty(athlete_id) ||
+      this.isEmpty(age) ||
+      this.isEmpty(sex) ||
+      this.isEmpty(height) ||
+      this.isEmpty(weight) ||
+      this.isEmpty(gold_medal_count) ||
+      this.isEmpty(bronze_medal_count) ||
+      this.isEmpty(silver_medal_count) ||
+      this.isEmpty(name) ||
+      this.isEmpty(country)
+    ) {
+      console.log("Not Fill in enough Infor");
+      console.log(gold_medal_count, silver_medal_count, bronze_medal_count);
+      return;
+    }
+    let newPost = {
+      athlete_id: athlete_id,
+      age: age,
+      sex: sex,
+      height: height,
+      weight: weight,
+      gold_medal_count: gold_medal_count,
+      silver_medal_count: silver_medal_count,
+      bronze_medal_count: bronze_medal_count,
+      name: name,
+      country: country,
+    };
+    fetch("http://localhost:3001/db/athlete/update", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log("put request response data", data);
+      });
+  }
   render() {
     // if (this.props.loggedInStatus === "NOT_LOGGED_IN")
     //   return (
@@ -531,6 +584,15 @@ export default class Main extends React.Component {
               onChange={this.countryChange}
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="none">Delete/Update Athlete with this ID</label>
+            <input
+              type="text"
+              name="id"
+              placeholder="Athlete ID number"
+              onChange={this.athleteIdChange}
+            />
+          </div>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -538,15 +600,13 @@ export default class Main extends React.Component {
           >
             ADD
           </button>
-          <div className="form-group">
-            <label htmlFor="none">Delete Athlete with this ID</label>
-            <input
-              type="text"
-              name="id"
-              placeholder="Athelete ID number"
-              onChange={this.athleteIdChange}
-            />
-          </div>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.updateAthlete()}
+          >
+            UPDATE
+          </button>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
