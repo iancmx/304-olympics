@@ -13,16 +13,31 @@ export default class Main extends React.Component {
       query4s: [],
       query5s: [],
       query6s: [],
+      query7s: [],
       isLoaded1: false,
       isLoaded2: false,
       isLoaded3: false,
       isLoaded4: false,
       isLoaded5: false,
       isLoaded6: false,
+      isLoaded7: false,
+      age: "",
+      sex: "",
+      weight: "",
+      height: "",
+      gold_medal_count: "",
+      silver_medal_count: "",
+      bronze_medal_count: "",
+      participant_id: "",
     };
-  }
-  componentDidMount() {
-    ReactDOM.findDOMNode(this).scrollIntoView(0, 0);
+    this.ageChange = this.ageChange.bind(this);
+    this.sexChange = this.sexChange.bind(this);
+    this.weightChange = this.weightChange.bind(this);
+    this.heightChange = this.heightChange.bind(this);
+    this.goldMedalChange = this.goldMedalChange.bind(this);
+    this.silverMedalChange = this.silverMedalChange.bind(this);
+    this.bronzeMedalChange = this.bronzeMedalChange.bind(this);
+    this.participant_idChange = this.participant_idChange.bind(this);
   }
   queryHandler = (query) => {
     console.log(query);
@@ -45,6 +60,9 @@ export default class Main extends React.Component {
         break;
       case "query6":
         path = "http://localhost:3001/db/country/participateAllSports";
+        break;
+      case "query7":
+        path = "http://localhost:3001/db/athlete/";
         break;
       default:
         return;
@@ -93,6 +111,12 @@ export default class Main extends React.Component {
               query6s: json,
             });
             break;
+          case "query7":
+            this.setState({
+              isLoaded7: true,
+              query7s: json,
+            });
+            break;
         }
         console.log("the json", json);
       })
@@ -107,20 +131,9 @@ export default class Main extends React.Component {
     if (!isLoaded1)
       return (
         <tr>
-          <td>No Data...</td>
+          <td></td>
         </tr>
       );
-    // return (
-    //   <div className="App">
-    //     <ul>
-    //       {query1s.map((row) => (
-    //         <li key={row.country_name}>
-    //           Country: {row.country_name} | Gold Medal: {row.gold_medal_count}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // );
     return query1s.map((row, index) => {
       const { country_name, gold_medal_count } = row; //destructuring
       return (
@@ -137,20 +150,9 @@ export default class Main extends React.Component {
     if (!isLoaded2)
       return (
         <tr>
-          <td>No Data...</td>
+          <td></td>
         </tr>
       );
-    // return (
-    //   <div className="App" style={{ overflow: "auto" }}>
-    //     <ul>
-    //       {query2s.map((row) => (
-    //         <li key={row.name + row.country}>
-    //           Name: {row.name} | Country: {row.country}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // );
     return query2s.map((row, index) => {
       const { name, country } = row; //destructuring
       return (
@@ -166,21 +168,9 @@ export default class Main extends React.Component {
     if (!isLoaded3)
       return (
         <tr>
-          <td>No Data...</td>
+          <td></td>
         </tr>
       );
-    // return (
-    //   <div className="App">
-    //     <ul>
-    //       {query3s.map((row) => (
-    //         <li key={row.name + row.age + row.sport}>
-    //           Name: {row.name} | Age: {row.age} | Sport: {row.sport} | Country:{" "}
-    //           {row.country}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // );
     return query3s.map((row, index) => {
       const { name, age, sport, country } = row; //destructuring
       return (
@@ -199,20 +189,9 @@ export default class Main extends React.Component {
     if (!isLoaded4)
       return (
         <tr>
-          <td>No Data...</td>
+          <td></td>
         </tr>
       );
-    // return (
-    //   <div className="App">
-    //     <ul>
-    //       {query4s.map((row) => (
-    //         <li key={row.country_name}>
-    //           Name: {row.country_name} | Gold Medal: {row.gold_medal_count}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // );
     return query4s.map((row, index) => {
       const { country_name, gold_medal_count } = row; //destructuring
       return (
@@ -229,21 +208,9 @@ export default class Main extends React.Component {
     if (!isLoaded5)
       return (
         <tr>
-          <td>No Data...</td>
+          <td></td>
         </tr>
       );
-    // return (
-    //   <div className="App">
-    //     <ul>
-    //       {query5s.map((row) => (
-    //         <li key={row.country}>
-    //           Country: {row.country} | # of Athletes: {row.number_of_athletes} |
-    //           Average Age: {row.average}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // );
     return query5s.map((row, index) => {
       const { country, number_of_athletes, average } = row; //destructuring
       return (
@@ -261,23 +228,50 @@ export default class Main extends React.Component {
     if (!isLoaded6)
       return (
         <tr>
-          <td>No Data...</td>
+          <td></td>
         </tr>
       );
-    // return (
-    //   <div className="App">
-    //     <ul>
-    //       {query6s.map((row) => (
-    //         <li key={row.nationality}>Country: {row.nationality}</li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // );
     return query6s.map((row, index) => {
       const { nationality } = row; //destructuring
       return (
         <tr key={nationality}>
           <td>{nationality}</td>
+        </tr>
+      );
+    });
+  }
+  renderTable7() {
+    var { isLoaded7, query7s } = this.state;
+
+    if (!isLoaded7)
+      return (
+        <tr>
+          <td></td>
+        </tr>
+      );
+    return query7s.map((row, index) => {
+      const {
+        athlete_id,
+        age,
+        sex,
+        weight,
+        height,
+        gold_medal_count,
+        silver_medal_count,
+        bronze_medal_count,
+        participant_id,
+      } = row; //destructuring
+      return (
+        <tr key={index}>
+          <td>{athlete_id}</td>
+          <td>{age}</td>
+          <td>{sex}</td>
+          <td>{weight}</td>
+          <td>{height}</td>
+          <td>{gold_medal_count}</td>
+          <td>{silver_medal_count}</td>
+          <td>{bronze_medal_count}</td>
+          <td>{participant_id}</td>
         </tr>
       );
     });
@@ -310,6 +304,10 @@ export default class Main extends React.Component {
         isLoaded = this.state.isLoaded6;
         querys = this.state.query6s;
         break;
+      case "query7":
+        isLoaded = this.state.isLoaded7;
+        querys = this.state.query7s;
+        break;
     }
 
     if (!isLoaded) return <th></th>;
@@ -318,21 +316,47 @@ export default class Main extends React.Component {
       return <th key={index}>{key.toUpperCase()}</th>;
     });
   };
+  ageChange(event) {
+    this.setState({ age: event.target.value });
+  }
+  sexChange(event) {
+    this.setState({ sex: event.target.value });
+  }
+  weightChange(event) {
+    this.setState({ weight: event.target.value });
+  }
+  heightChange(event) {
+    this.setState({ height: event.target.value });
+  }
+  goldMedalChange(event) {
+    this.setState({ gold_medal_count: event.target.value });
+  }
+  silverMedalChange(event) {
+    this.setState({ silver_medal_count: event.target.value });
+  }
+  bronzeMedalChange(event) {
+    this.setState({ bronze_medal_count: event.target.value });
+  }
+  participant_idChange(event) {
+    this.setState({ participant_id: event.target.value });
+  }
+  insertAthlete() {}
+  deleteAthlete() {}
   render() {
-    if (this.props.loggedInStatus === "NOT_LOGGED_IN")
-      return (
-        <div
-          className="Main"
-          style={{
-            backgroundImage: `url(${olympic})`,
-            minHeight: "100%",
-            minWidth: "100%",
-          }}
-        >
-          <h1>OLYMPIC 2020</h1>
-          <h1>{this.props.loggedInStatus}</h1>
-        </div>
-      );
+    // if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+    //   return (
+    //     <div
+    //       className="Main"
+    //       style={{
+    //         backgroundImage: `url(${olympic})`,
+    //         minHeight: "100%",
+    //         minWidth: "100%",
+    //       }}
+    //     >
+    //       <h1>OLYMPIC 2020</h1>
+    //       <h1>{this.props.loggedInStatus}</h1>
+    //     </div>
+    //   );
     //Main Page
     return (
       <div
@@ -350,6 +374,117 @@ export default class Main extends React.Component {
         }}
       >
         <h1>OLYMPIC 2020</h1>
+        <div className="form">
+          <div className="form-group">
+            <label htmlFor="none">Age</label>
+            <input
+              type="text"
+              name="age"
+              placeholder="In number"
+              onChange={this.ageChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">Sex</label>
+            <input
+              type="text"
+              name="sex"
+              placeholder="male/female"
+              onChange={this.sexChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">Height</label>
+            <input
+              type="text"
+              name="height"
+              placeholder="In cm"
+              onChange={this.heightChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">Weight</label>
+            <input
+              type="text"
+              name="weight"
+              placeholder="In Kg"
+              onChange={this.weightChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">gold medal count</label>
+            <input
+              type="text"
+              name="gold"
+              placeholder="number"
+              onChange={this.gold_medal_count}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">silver medal count</label>
+            <input
+              type="text"
+              name="silver"
+              placeholder="number"
+              onChange={this.silverMedalChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">gold medal count</label>
+            <input
+              type="text"
+              name="bronze"
+              placeholder="number"
+              onChange={this.bronzeMedalChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">participant ID</label>
+            <input
+              type="text"
+              name="id"
+              placeholder="number"
+              onChange={this.participant_idChange}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.insertAthlete()}
+          >
+            INSERT
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.deleteAthlete()}
+          >
+            DELETE
+          </button>
+        </div>
+        <div>
+          <span>Athletes Information </span>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.queryHandler("query7")}
+          >
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded7: false })}
+          >
+            HIDE
+          </button>
+          <table id="table7">
+            <tbody>
+              <tr>{this.renderTableHeader("query7")}</tr>
+              {this.renderTable7()}
+            </tbody>
+          </table>
+        </div>
         <div>
           <span>Countries with gold medels </span>
           <button
@@ -357,7 +492,14 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.queryHandler("query1")}
           >
-            Query
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded1: false })}
+          >
+            HIDE
           </button>
           <table id="table1">
             <tbody>
@@ -373,7 +515,14 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.queryHandler("query2")}
           >
-            Query
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded2: false })}
+          >
+            HIDE
           </button>
           <table id="table2">
             <tbody>
@@ -389,7 +538,14 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.queryHandler("query3")}
           >
-            Query
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded3: false })}
+          >
+            HIDE
           </button>
           <table id="table3">
             <tbody>
@@ -405,7 +561,14 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.queryHandler("query4")}
           >
-            Query
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded4: false })}
+          >
+            HIDE
           </button>
           <table id="table4">
             <tbody>
@@ -421,7 +584,14 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.queryHandler("query5")}
           >
-            Query
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded5: false })}
+          >
+            HIDE
           </button>
           <table id="table5">
             <tbody>
@@ -437,7 +607,14 @@ export default class Main extends React.Component {
             className="btn btn-secondary btn-sm"
             onClick={() => this.queryHandler("query6")}
           >
-            Query
+            SHOW
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => this.setState({ isLoaded6: false })}
+          >
+            HIDE
           </button>
           <table id="table6">
             <tbody>
