@@ -143,7 +143,6 @@ CREATE TABLE participatesinevent (
 	FOREIGN KEY(event_id) REFERENCES sportevent(event_id) ON DELETE CASCADE,	
 	CONSTRAINT event_result_description CHECK (result_description IN ('Won', 'Lost', 'Draw', 'Disqualified', 'Qualified', 'Not Qualified', 'Withdrew', 'Not Available'))
 );
-user_idlogin
 
 CREATE TABLE user (
 	user_id int PRIMARY KEY AUTO_INCREMENT,

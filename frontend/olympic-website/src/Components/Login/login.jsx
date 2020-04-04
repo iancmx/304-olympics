@@ -35,14 +35,19 @@ export class Login extends React.Component {
 				method: 'post',
 				headers: {'Content-Type': 'application/json'},
 				body: JSON.stringify({
-					username: username,
+					login: username,
 					password: password
 				})
 			})
-			.then(response => {console.log(response.json())})
+			.then(response => {
+				console.log(response.json());
+				if (response.data){
+					this.props.handleSuccessfulAuthentication(response.data);
+				}
+			})
 			.catch(error => {console.log(error)});
 		}
-	}`
+	}
 
   render() {
     return (
