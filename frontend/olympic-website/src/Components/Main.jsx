@@ -471,20 +471,20 @@ export default class Main extends React.Component {
       });
   }
   render() {
-    // if (this.props.loggedInStatus === "NOT_LOGGED_IN")
-    //   return (
-    //     <div
-    //       className="Main"
-    //       style={{
-    //         backgroundImage: `url(${olympic})`,
-    //         minHeight: "100%",
-    //         minWidth: "100%",
-    //       }}
-    //     >
-    //       <h1>OLYMPIC 2020</h1>
-    //       <h1>{this.props.loggedInStatus}</h1>
-    //     </div>
-    //   );
+    if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+      return (
+        <div
+          className="Main"
+          style={{
+            backgroundImage: `url(${olympic})`,
+            minHeight: "100%",
+            minWidth: "100%",
+          }}
+        >
+          <h1>OLYMPIC 2020</h1>
+          <h1>{this.props.loggedInStatus}</h1>
+        </div>
+      );
     //Main Page
     return (
       <div
