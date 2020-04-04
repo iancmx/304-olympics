@@ -388,6 +388,7 @@ export default class Main extends React.Component {
     };
     fetch("http://localhost:3001/db/athlete/newAthlete", {
       method: "post",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPost),
     })
       .then(function (response) {
