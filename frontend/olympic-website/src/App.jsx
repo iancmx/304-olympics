@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import "./App.scss";
-import Home from "./Components/Home"
-import Main from "./Components/Main"
+import Home from "./Components/Home";
+import Main from "./Components/Main";
+import notFoundPage from "./Components/404";
 
 class App extends React.Component {
 	constructor(props) {
@@ -39,6 +40,8 @@ class App extends React.Component {
 							<Main {...props} loggedInStatus={this.state.loggedInStatus} />
 						)}
 						/>
+						<Route exact path={"/404"} Component={notFoundPage} />
+            			<Redirect to="/404" />
 					</Switch>
 				</BrowserRouter>
 			</div>

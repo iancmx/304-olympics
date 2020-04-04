@@ -21,7 +21,6 @@ export class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-
 	handleSubmit(){
 		const username = this.state.username;
 		const password = this.state.password;
