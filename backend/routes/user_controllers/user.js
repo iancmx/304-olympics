@@ -4,12 +4,10 @@ const db = require("../../db");
 const handleLogin = async (req, res) => {
 	const { login, password } = req.body;
 
-	let query = "SELECT user_id \
+	let query = `SELECT user_id \
 	FROM user\
-	WHERE login = '??' \
-	AND password = '??' ";
-
-	query = mysql.format(query, [login, password]);
+	WHERE login = "${login}" \
+	AND password = "${password}" `;
 
 	console.log(query);
 
@@ -32,10 +30,10 @@ const handleRegister = async (req, res) => {
   }
 
   let insertQuery =
-    "INSERT INTO user (login, password, permission) VALUES ('??', '??', FALSE)";
+    `INSERT INTO user (login, password, permission) VALUES ("${login}", "${password}", FALSE)`;
   if (permission == "true" | permission == "True"){
 	insertQuery =
-    "INSERT INTO user (login, password, permission) VALUES ('??', '??', TRUE)";
+    `INSERT INTO user (login, password, permission) VALUES ("${login}", "${password}", TRUE)`;
   }
 
   let query = mysql.format(insertQuery, [
