@@ -35,15 +35,13 @@ AND bronze_medal_count = ${bronze_medal_count} `,
       let insertQuery = `INSERT INTO athlete (age, sex, weight, height, gold_medal_count, silver_medal_count, bronze_medal_count, participant_id) VALUES (${age}, "${sex}", ${weight}, ${height}, ${gold_medal_count}, ${silver_medal_count}, ${bronze_medal_count}, ${participant_id})`;
 
       console.log(insertQuery);
-    
+
       db.query(insertQuery, (err, resp) => {
         if (err) throw err;
         res.json(resp.insertId);
       });
     }
   );
-
-
 };
 
 const updateAthlete = async (req, res) => {};
@@ -61,7 +59,7 @@ const allAthletes = async (req, res) => {
 
 const numAthleteAgeCountry = async (req, res) => {
   db.query(
-    "SELECT P.country, COUNT(*) AS number_of_athletes, AVG(A.age) FROM athlete A, participant P WHERE A.participant_id = P.participant_id  GROUP BY P.country;",
+    "SELECT P.country AS country, COUNT(*) AS number_of_athletes, AVG(A.age)AS average FROM athlete A, participant P WHERE A.participant_id = P.participant_id  GROUP BY P.country;",
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);

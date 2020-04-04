@@ -37,7 +37,7 @@ const participateAllSports = async (req, res) => {
     WHERE not exists (SELECT S.sport_id FROM sport S WHERE S.sport_id NOT IN( \
               SELECT PS.sport_id FROM participant P, athlete A, participantsport PS \
                         WHERE NC.nationality = P.country and P.participant_id = PS.participant_id and P.participant_id = A.participant_id))\
-    ORDER BY nationality asc"; 
+    ORDER BY nationality asc";
   console.log(query);
   await db.query(query, (err, resp) => {
     if (err) throw err;
@@ -48,5 +48,5 @@ const participateAllSports = async (req, res) => {
 module.exports = {
   atLeastOneGold,
   mostGoldMedals,
-  participateAllSports
+  participateAllSports,
 };
