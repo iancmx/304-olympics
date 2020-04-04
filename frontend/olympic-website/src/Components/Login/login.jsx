@@ -38,13 +38,19 @@ export class Login extends React.Component {
 					password: password
 				})
 			})
-			.then(response => {
-				console.log(response.json());
-				if (response.data){
-					this.props.handleSuccessfulAuthentication(response.data);
-				}
+			.then(response => 
+    			response.json().then(data => ({
+        			data: data,
+        			status: response.status,
+    			}))
+			).then(res => {
+    			console.log(res.status, res.data);
+    			var data = res.data[0];
+    			if(data){
+    				this.props.handleSuccessfulAuthentication(data);
+    			}
 			})
-			.catch(error => {console.log(error)});
+			.catch(error => {console.log(error)}, );
 		}
 	}
 
