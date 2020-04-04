@@ -1,11 +1,10 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import "./App.scss";
 import Home from "./Components/Home"
 import Main from "./Components/Main"
 
 class App extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
