@@ -340,7 +340,28 @@ export default class Main extends React.Component {
   participant_idChange(event) {
     this.setState({ participant_id: event.target.value });
   }
-  insertAthlete() {}
+  insertAthlete() {
+    let newPost = {
+      age: this.state.age,
+      sex: this.state.sex,
+      height: this.state.height,
+      weight: this.state.weight,
+      gold_medal_count: this.state.gold_medal_count,
+      silver_medal_count: this.state.silver_medal_count,
+      bronze_medal_count: this.state.bronze_medal_count,
+      participant_id: this.state.participant_id,
+    };
+    fetch("http://localhost:3001/db/athlete/newAthlete", {
+      method: "post",
+      body: JSON.stringify(newPost),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log("post request response data", data);
+      });
+  }
   deleteAthlete() {}
   render() {
     // if (this.props.loggedInStatus === "NOT_LOGGED_IN")
@@ -430,7 +451,7 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">gold medal count</label>
+            <label htmlFor="none">bronze medal count</label>
             <input
               type="text"
               name="bronze"
