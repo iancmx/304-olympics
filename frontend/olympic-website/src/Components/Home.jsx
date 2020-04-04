@@ -8,7 +8,8 @@ export default class Home extends React.Component {
 		super(props);
 		this.state = {
 			isLoginActive: true,	
-		}
+		};
+		this.handleSuccessfulAuthentication = this.handleSuccessfulAuthentication.bind(this);
 	}
 
 	changeState(){
@@ -24,6 +25,11 @@ export default class Home extends React.Component {
 		this.setState(prevState => ({isLoginActive: !prevState.isLoginActive}));
 	}
 
+	handleSuccessfulAuthentication(data) {
+		this.props.handleLogin(data);
+		this.props.history.push("/main");
+	}
+
 	render() {
 		const { isLoginActive } = this.state;
 		const current = isLoginActive ? "Register" : "Login";
@@ -32,8 +38,8 @@ export default class Home extends React.Component {
 			<div className="Home">
 				<div className="login">
 					<div className="container"> 
-						{isLoginActive && <Login containerRef={(ref)=>this.current = ref}/>}
-						{!isLoginActive && <Register containerRef={(ref)=>this.current = ref}/>}
+						{isLoginActive && <Login containerRef={(ref)=>this.current = ref} handleSuccessfulAuthentication={this.handleSuccessfulAuthentication}/>}
+						{!isLoginActive && <Register containerRef={(ref)=>this.current = ref} handleSuccessfulAuthentication={this.handleSuccessfulAuthentication}/>}
 					</div>
 					<SideButton current={current} containerRef={ref => this.sideButton = ref} onClick={this.changeState.bind(this)}/>
 				</div>

@@ -12,6 +12,16 @@ class App extends React.Component {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: "LOGGED_IN",
+      user: data,
+    });
+    console.log(data);
   }
 
   render() {
@@ -23,7 +33,11 @@ class App extends React.Component {
               exact
               path={"/"}
               render={(props) => (
-                <Home {...props} loggedInStatus={this.state.loggedInStatus} />
+                <Home
+                  {...props}
+                  handleLogin={this.handleLogin}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
               )}
             />
             <Route
@@ -33,7 +47,7 @@ class App extends React.Component {
                 <Main {...props} loggedInStatus={this.state.loggedInStatus} />
               )}
             />
-            <Route exact path={"/404"} redner={() => <notFoundPage />} />
+            <Route exact path={"/404"} Component={notFoundPage} />
             <Redirect to="/404" />
           </Switch>
         </BrowserRouter>
