@@ -543,9 +543,17 @@ export default class Main extends React.Component {
           </div>
         </div>
         <h1>OLYMPIC 2020</h1>
-        <div className="form">
+        <div
+          className="form"
+          style={{ backgroundColor: "black", color: "white" }}
+        >
           <div className="form-group">
-            <label htmlFor="none">Age</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Age
+            </label>
             <input
               type="text"
               name="age"
@@ -554,7 +562,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Sex</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Sex
+            </label>
             <input
               type="text"
               name="sex"
@@ -563,7 +576,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Height</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Height
+            </label>
             <input
               type="text"
               name="height"
@@ -572,7 +590,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Weight</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Weight
+            </label>
             <input
               type="text"
               name="weight"
@@ -581,7 +604,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">gold medal count</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              gold medal count
+            </label>
             <input
               type="text"
               name="gold"
@@ -590,7 +618,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">silver medal count</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              silver medal count
+            </label>
             <input
               type="text"
               name="silver"
@@ -599,7 +632,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">bronze medal count</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              bronze medal count
+            </label>
             <input
               type="text"
               name="bronze"
@@ -608,7 +646,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Name</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Name
+            </label>
             <input
               type="text"
               name="id"
@@ -617,7 +660,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Country</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Country
+            </label>
             <input
               type="text"
               name="id"
@@ -626,7 +674,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Delete/Update Athlete with this ID</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Delete/Update Athlete with this ID
+            </label>
             <input
               type="text"
               name="id"
@@ -657,7 +710,9 @@ export default class Main extends React.Component {
           </button>
         </div>
         <div>
-          <span>Athletes Information </span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            Athletes Information{" "}
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -674,9 +729,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table7"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query7")}</tr>
@@ -685,7 +738,9 @@ export default class Main extends React.Component {
           </table>
         </div>
         <div>
-          <span>Countries with gold medels </span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            Countries with gold medels{" "}
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -702,9 +757,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table1"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query1")}</tr>
@@ -713,7 +766,10 @@ export default class Main extends React.Component {
           </table>
         </div>
         <div>
-          <span> Athletes' Nationality</span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            {" "}
+            Athletes' Nationality
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -730,9 +786,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table2"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query2")}</tr>
@@ -742,7 +796,12 @@ export default class Main extends React.Component {
         </div>
         <div>
           <div className="form-group">
-            <label htmlFor="none">Min Age</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Min Age
+            </label>
             <input
               type="text"
               name="minage"
@@ -751,7 +810,12 @@ export default class Main extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="none">Max Age</label>
+            <label
+              htmlFor="none"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Max Age
+            </label>
             <input
               type="text"
               name="maxage"
@@ -759,7 +823,10 @@ export default class Main extends React.Component {
               onChange={this.maxageChange}
             />
           </div>
-          <span> Athletes between this age range</span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            {" "}
+            Athletes between this age range
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -776,9 +843,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table3"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query3")}</tr>
@@ -787,7 +852,10 @@ export default class Main extends React.Component {
           </table>
         </div>
         <div>
-          <span> Countries with most Gold Medal</span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            {" "}
+            Countries with most Gold Medal
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -804,9 +872,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table4"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query4")}</tr>
@@ -815,7 +881,9 @@ export default class Main extends React.Component {
           </table>
         </div>
         <div>
-          <span>Each country's number of athletes</span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            Each country's number of athletes
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -832,9 +900,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table5"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query5")}</tr>
@@ -843,7 +909,9 @@ export default class Main extends React.Component {
           </table>
         </div>
         <div>
-          <span>Countries participate in all sports</span>
+          <span style={{ backgroundColor: "black", color: "white" }}>
+            Countries participate in all sports
+          </span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -860,9 +928,7 @@ export default class Main extends React.Component {
           </button>
           <table
             id="table6"
-            style={{
-              backgroundColor: "white",
-            }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
             <tbody>
               <tr>{this.renderTableHeader("query6")}</tr>
