@@ -1,5 +1,7 @@
 import React from "react";
-import olympic from "../olympic1.jpg";
+import olympic from "../olympic.jpg";
+import olympicicon from "../olympicicon.png";
+import "./Main.css";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -57,8 +59,6 @@ export default class Main extends React.Component {
         path = "http://localhost:3001/db/participant/getCountries";
         break;
       case "query3":
-        console.log(this.state.minage);
-        console.log(this.state.maxage);
         path =
           "http://localhost:3001/db/participant/ageBetweenSport/" +
           this.state.minage +
@@ -530,6 +530,18 @@ export default class Main extends React.Component {
           overflowY: "scroll",
         }}
       >
+        <div id="navbar">
+          <a href="http://localhost:3000/main" id="logo">
+            OLYMPIC 2020
+          </a>
+          <div id="navbar-right">
+            <a class="active" href="http://localhost:3000/main">
+              Home
+            </a>
+            <a href="http://localhost:3000/information">Infor</a>
+            <a href="http://localhost:3000/">Log Out</a>
+          </div>
+        </div>
         <h1>OLYMPIC 2020</h1>
         <div className="form">
           <div className="form-group">
@@ -660,7 +672,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table7">
+          <table
+            id="table7"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query7")}</tr>
               {this.renderTable7()}
@@ -683,7 +700,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table1">
+          <table
+            id="table1"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query1")}</tr>
               {this.renderTable1()}
@@ -706,7 +728,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table2">
+          <table
+            id="table2"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query2")}</tr>
               {this.renderTable2()}
@@ -747,7 +774,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table3">
+          <table
+            id="table3"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query3")}</tr>
               {this.renderTable3()}
@@ -770,7 +802,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table4">
+          <table
+            id="table4"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query4")}</tr>
               {this.renderTable4()}
@@ -793,7 +830,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table5">
+          <table
+            id="table5"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query5")}</tr>
               {this.renderTable5()}
@@ -816,7 +858,12 @@ export default class Main extends React.Component {
           >
             HIDE
           </button>
-          <table id="table6">
+          <table
+            id="table6"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
             <tbody>
               <tr>{this.renderTableHeader("query6")}</tr>
               {this.renderTable6()}

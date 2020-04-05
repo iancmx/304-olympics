@@ -47,7 +47,16 @@ class App extends React.Component {
                 <Main {...props} loggedInStatus={this.state.loggedInStatus} />
               )}
             />
-            <Route exact path={"/404"} Component={notFoundPage} />
+            <Route
+              exact
+              path={"/404"}
+              render={(props) => (
+                <notFoundPage
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
             <Redirect to="/404" />
           </Switch>
         </BrowserRouter>
