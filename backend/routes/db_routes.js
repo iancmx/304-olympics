@@ -32,9 +32,18 @@ router.get("/country/oneGoldMin", country.atLeastOneGold);
 router.get("/country/mostGoldMedals", country.mostGoldMedals);
 router.get("/country/mostSilverMedals", country.mostSilverMedals);
 router.get("/country/mostBronzeMedals", country.mostBronzeMedals);
+router.get("/country/mostTotalMedals", country.mostTotalMedals);
+router.get("/country/leastGoldMedals", country.leastGoldMedals);
+router.get("/country/leastSilverMedals", country.leastSilverMedals);
+router.get("/country/leastBronzeMedals", country.leastBronzeMedals);
+router.get("/country/leastTotalMedals", country.leastTotalMedals);
 router.get("/country/participateAllSports", country.participateAllSports);
 router.get("/country", country.allCountries);
 router.delete("/country/delete/:name", country.deleteCountry);
 router.get("/country/:name", country.getInfo);
+router.post("/country/projectCountryMedal", country.projectCountryMedal);
+router.post("/country/projectCountryMedalJoin", country.projectCountryMedalJoin);
+router.post("/country/newCountry", country.newCountry);
+router.post("/country/updateCountry", country.updateCountry);
 
 module.exports = router;
