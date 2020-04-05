@@ -112,20 +112,41 @@ const getInfo = async (req, res) => {
 };
 
 const allAthletes = async (req, res) => {
-  db.query("SELECT * FROM athlete", (err, result, fields) => {
-    if (err) throw err;
-    res.json(result);
-  });
-};
-
-const numAthleteAgeCountry = async (req, res) => {
   db.query(
-    "SELECT P.country AS country, COUNT(*) AS number_of_athletes, AVG(A.age) AS average FROM athlete A, participant P WHERE A.participant_id = P.participant_id  GROUP BY P.country",
+    "SELECT A.athlete_id AS id, P.name, A.age, A.sex, A.weight, A.height, P.country, A.gold_medal_count, A.silver_medal_count, A.bronze_medal_count FROM athlete A, participant P WHERE A.participant_id = P.participant_id",
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
     }
   );
+};
+
+const numAthleteAgeCountry = async (req, res) => {
+  db.query(
+    "SELECT A.athlete_id AS id, P.country AS country, COUNT(*) AS number_of_athletes, AVG(A.age) AS average FROM athlete A, participant P WHERE A.participant_id = P.participant_id  GROUP BY P.country",
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+};
+
+const ageAthletes = async (req, res) => {
+  const { min, max } = req.body;
+  query = `SELECT A.athlete_id AS id, P.name, A.age,  A.gold_medal_count, A.silver_medal_count, A.bronze_medal_count FROM athlete A, participant P WHERE A.participant_id = P.participant_id AND A.age <= ${max} AND A.age >= ${min}`;
+  db.query(query, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
+const groupAthletes = async (req, res) => {
+  const { parameter } = req.body;
+  query = `SELECT  ${parameter}, COUNT(*) AS count FROM athlete A, participant P WHERE A.participant_id = P.participant_id GROUP By ${parameter}`;
+  db.query(query, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
 };
 
 module.exports = {
@@ -135,4 +156,6 @@ module.exports = {
   getInfo,
   allAthletes,
   numAthleteAgeCountry,
+  ageAthletes,
+  groupAthletes,
 };
