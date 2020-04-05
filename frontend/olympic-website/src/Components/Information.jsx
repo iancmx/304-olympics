@@ -1,5 +1,5 @@
 import React from "react";
-import { Country, Athletes } from "./Information/index";
+import { Country, Athletes, Sports } from "./Information/index";
 
 export default class Information extends React.Component {
 
@@ -40,6 +40,7 @@ export default class Information extends React.Component {
 				<div className="container"> 
 					{this.state.mode==="Country" && <Country containerRef={(ref)=>this.current = ref}/>}
 					{this.state.mode==="Athletes" && <Athletes containerRef={(ref)=>this.current = ref}/>}
+					{this.state.mode==="Sports" && <Sports containerRef={(ref)=>this.current = ref}/>}
 				</div>
 					
 			</div>

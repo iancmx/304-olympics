@@ -54,10 +54,18 @@ const updateSport = async (req, res) => {
   });
 };
 
+const allSportsEvents = async (req, res) => {
+  db.query("SELECT S.sport_id, S.name AS sport_name, E.event_id, E.name AS event_name, E.date, EV.city, EV.street, EV.zip_code, V.name AS venue_name FROM sport S, sportEvent E, eventVenue EV, Venue V WHERE S.sport_id = E.sport_id AND E.event_id = EV.event_id AND EV.city = V.city AND EV.street = V.street AND EV.zip_code = V.zip_code", (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
 module.exports = {
   newSport,
   allSports,
   getInfo,
   deleteSport,
-  updateSport
+  updateSport,
+  allSportsEvents
 };
