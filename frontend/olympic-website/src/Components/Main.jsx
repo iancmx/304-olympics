@@ -542,7 +542,13 @@ export default class Main extends React.Component {
             <a href="http://localhost:3000/">Log Out</a>
           </div>
         </div>
-        <h1>OLYMPIC 2020</h1>
+        <div>
+          <h1>OLYMPIC 2020</h1>
+        </div>
+        <div>
+          <h1>WELCOME TO OLYMPIC 2020</h1>
+          <h3>You can search for some information about Olympic below</h3>
+        </div>
         <div
           className="form"
           style={{ backgroundColor: "black", color: "white" }}

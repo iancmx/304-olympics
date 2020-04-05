@@ -34,12 +34,23 @@ export default class Information extends React.Component {
           overflowY: "scroll",
         }}
       >
+        <div id="navbar">
+          <a href="http://localhost:3000/main" id="logo">
+            OLYMPIC 2020
+          </a>
+          <div id="navbar-right">
+            <a class="active" href="http://localhost:3000/main">
+              Home
+            </a>
+            <a href="http://localhost:3000/information">Infor</a>
+            <a href="http://localhost:3000/">Log Out</a>
+          </div>
+        </div>
+        <div>
+          <h1>OLYMPIC 2020</h1>
+          <h1>Search for Olympic Information with 4 categories below</h1>
+        </div>
         <div className="Top_level_view" style={{ position: "relative" }}>
-          <Link to="/main">
-            <button type="button" className="btn">
-              OLYMPIC 2020
-            </button>
-          </Link>
           <button
             type="button"
             className="btn"
@@ -72,16 +83,6 @@ export default class Information extends React.Component {
             {" "}
             Users{" "}
           </button>
-          <Link to="/main">
-            <button type="button" className="btn">
-              MAIN
-            </button>
-          </Link>
-          <Link to="/">
-            <button type="button" className="btn">
-              LOG OUT
-            </button>
-          </Link>
         </div>
         <div className="container">
           {this.state.mode === "Country" && (
