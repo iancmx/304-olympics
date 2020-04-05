@@ -7,10 +7,14 @@ export class Athletes extends React.Component {
       query_results:[],
       age_query_result:[],
       group_query_result:[],
+      sport_query_result:[],
+      list_quest_sports:[],
 
       loaded:false,
       age_loaded:false,
       group_loaded:false,
+      sport_loaded:false,
+      list_quest_sports_loaded:false,
 
       id:"",
       name: "",
@@ -27,6 +31,7 @@ export class Athletes extends React.Component {
       maxage: 100,
 
       group:"",
+      sport_selection:""
     };
 
     this.ageChange = this.ageChange.bind(this);
@@ -48,6 +53,9 @@ export class Athletes extends React.Component {
     this.handleSubmitMinMax = this.handleSubmitMinMax.bind(this);
     this.groupCriteriaChange = this.groupCriteriaChange.bind(this);
     this.handleGroupSearch = this.handleGroupSearch.bind(this);
+    this.handlesportSearch = this.handlesportSearch.bind(this);
+    this.sportselectionChange = this.sportselectionChange.bind(this);
+    this.getSports = this.getSports.bind(this);
   }
 
   handleinsert(){
@@ -170,6 +178,9 @@ export class Athletes extends React.Component {
   idChange(event){
     this.setState({ id: event.target.value });
   }
+  sportselectionChange(event){
+    this.setState({sport_selection: event.target.value});
+  }
 
 
   handleSubmit(event) {
@@ -228,6 +239,48 @@ export class Athletes extends React.Component {
       .catch((error) => {
         console.log(error);
       });
+
+  }
+
+  handlesportSearch(event){
+      let {sport_selection} = this.state;
+
+      if ( sport_selection === "All"){
+        fetch("http://localhost:3001/db/athlete/sportDivision", {
+          method: "post",
+          body: JSON.stringify({
+            parameter : sport_selection
+          }),
+          headers: { "Content-Type": "application/json" },
+        }).then((response) => response.json())
+        .then((json) => {this.setState({ sport_query_result: json, sport_loaded:true})
+            console.log("the json", json);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+
+      }
+      else {
+        fetch("http://localhost:3001/db/athlete/sportSelection", {
+          method: "post",
+          body: JSON.stringify({
+            parameter : sport_selection
+          }),
+          headers: { "Content-Type": "application/json" },
+        }).then((response) => response.json())
+        .then((json) => {this.setState({ sport_query_result: json, sport_loaded:true})
+            console.log("the json", json);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      }
+
+
+
 
   }
 
@@ -339,6 +392,66 @@ export class Athletes extends React.Component {
               <td>{silver_medal_count}</td>
               <td>{bronze_medal_count}</td>
               <td>{count}</td>
+            </tr>
+          );
+        });
+  }
+
+  getSports(){
+    fetch("http://localhost:3001/db/sport", {
+          method: "get",
+          headers: { "Content-Type": "application/json" },
+        }).then((response) => response.json())
+        .then((json) => {this.setState({ list_quest_sports: json, list_quest_sports_loaded:true})
+            console.log("the json", json);
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+  }
+
+  renderSportList(){
+      var {list_quest_sports, list_quest_sports_loaded} = this.state;
+
+      if (!list_quest_sports_loaded || list_quest_sports_loaded[0]){
+        return;
+      }
+
+      return this.state.list_quest_sports.map((row, index) => {
+      const {id, name} = row; //destructuring
+      return (
+        <option key={id} value={name}>{name}</option>
+      );}
+      );
+  }
+
+  renderSportTableHeader(){
+    var { sport_query_result, sport_loaded } = this.state;
+    console.log("renderTableHeader");
+
+    if (!sport_loaded || !sport_query_result[0]){
+      return (
+        <tr>
+          <td></td>
+        </tr>
+      );
+    }
+
+    let header = Object.keys(sport_query_result[0]);
+    return (header.map((key, index) => {return <th key={index}>{key.toUpperCase()}</th>;
+    }));
+  }
+
+  renderSportTable(){
+      var { sport_query_result } = this.state;
+       return sport_query_result.map((row, index) => {
+          const {id, name} = row; //destructuring
+          return (
+            <tr key={id}>
+              <td>{id}</td>
+              <td>{name}</td>
             </tr>
           );
         });
@@ -494,6 +607,27 @@ export class Athletes extends React.Component {
             <tbody>
               <tr>{this.renderGroupTableHeader()}</tr>
               {this.renderGroupTable()}
+            </tbody>
+          </table>
+      </div>
+
+      <div>
+        <label>
+          Atheltes In Sport:
+          <select value={this.state.sport_selection} onChange={this.sportselectionChange}>
+            <option value="All">All</option>
+            {this.renderSportList()}
+          </select>
+          <button type="button" className="button" onClick={() => this.getSports()}> List Sports </button>
+          <button type="button" className="button" onClick={() => this.handlesportSearch()}> Submit </button>
+        </label>
+      </div>
+
+      <div>
+        <table id="sportTable">
+            <tbody>
+              <tr>{this.renderSportTableHeader()}</tr>
+              {this.renderSportTable()}
             </tbody>
           </table>
       </div>

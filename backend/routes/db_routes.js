@@ -16,6 +16,8 @@ router.get("/athlete/", athlete.allAthletes);
 router.get("/athlete/:id", athlete.getInfo);
 router.post("/athlete/athletebyage", athlete.ageAthletes);
 router.post("/athlete/athleteGroup", athlete.groupAthletes);
+router.post("/athlete/sportSelection", athlete.sportSelection);
+router.post("/athlete/sportDivision", athlete.sportDivision);
 
 router.get("/participant/getCountries", participant.nationalities);
 router.get(

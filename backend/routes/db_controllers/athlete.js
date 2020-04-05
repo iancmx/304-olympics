@@ -149,6 +149,31 @@ const groupAthletes = async (req, res) => {
   });
 };
 
+const sportSelection = async (req, res) => {
+  const { parameter } = req.body;
+ query = `SELECT A.athlete_id AS id, P.name FROM athlete A, participant P, sport S, participantsport PS WHERE A.participant_id = P.participant_id AND PS.participant_id = P.participant_id AND PS.sport_id = S.sport_id AND S.name = '${parameter}' ORDER BY P.name asc`;
+  db.query(query, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
+const sportDivision = async (req, res) => {
+  const { parameter } = req.body;
+    let query = `SELECT A.athlete_id as id, P.name\
+      FROM athlete A, participant P \
+      WHERE A.participant_id = P.participant_id and not exists (SELECT S.sport_id \ 
+                                                                FROM sport S \
+                                                                WHERE S.sport_id NOT IN( \
+                                                                SELECT PS.sport_id FROM  participantsport PS\
+                                                                WHERE P.participant_id = PS.participant_id ))`;
+  db.query(query, (err, result, fields) => {
+    if (err) throw err;
+    res.json(result);
+  });
+};
+
+
 module.exports = {
   newAthlete,
   updateAthlete,
@@ -158,4 +183,6 @@ module.exports = {
   numAthleteAgeCountry,
   ageAthletes,
   groupAthletes,
+  sportSelection,
+  sportDivision
 };
