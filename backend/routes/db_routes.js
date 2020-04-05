@@ -16,7 +16,10 @@ router.get("/athlete/", athlete.allAthletes);
 router.get("/athlete/:id", athlete.getInfo);
 
 router.get("/participant/getCountries", participant.nationalities);
-router.get("/participant/ageBetweenSport", participant.ageBetweenSport);
+router.get(
+  "/participant/ageBetweenSport/:minage/:maxage",
+  participant.ageBetweenSport
+);
 router.get("/participant/", participant.allParticipants);
 router.get("/participant/:id", participant.getInfo);
 router.delete("/participant/delete/:id", participant.deleteParticipant);
@@ -26,7 +29,6 @@ router.get("/sport", sport.allSports);
 router.delete("/sport/delete/:id", sport.deleteSport);
 router.put("/sport/update", sport.updateSport);
 router.get("/sport/:id", sport.getInfo);
-
 
 router.get("/country/oneGoldMin", country.atLeastOneGold);
 router.get("/country/mostGoldMedals", country.mostGoldMedals);

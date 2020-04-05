@@ -9,8 +9,7 @@ const nationalities = async (req, res) => {
 };
 
 const ageBetweenSport = async (req, res) => {
-
-  const { minage, maxage } = req.body;
+  const { minage, maxage } = req.params;
 
   db.query(
     `SELECT P.name AS name, A.age AS age, S.name AS sport, P.country AS country \
@@ -31,21 +30,26 @@ const allParticipants = (req, res) => {
     if (err) throw err;
     res.json(result);
   });
-}
+};
 
 const getInfo = async (req, res) => {
-  db.query(`SELECT * FROM participant WHERE participant_id = ${req.params.id}`, (err, result, fields) => {
-    if (err) throw err;
-    res.json(result);
-  });
+  db.query(
+    `SELECT * FROM participant WHERE participant_id = ${req.params.id}`,
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
 };
 
 const deleteParticipant = async (req, res) => {
-  db.query(`DELETE FROM participant WHERE participant_id = ${req.params.id}`, (err, result, fields) => {
-    if (err) throw err;
-    res.json(result);
-  });
-
+  db.query(
+    `DELETE FROM participant WHERE participant_id = ${req.params.id}`,
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
 };
 
 module.exports = {
@@ -53,5 +57,5 @@ module.exports = {
   ageBetweenSport,
   allParticipants,
   getInfo,
-  deleteParticipant
+  deleteParticipant,
 };

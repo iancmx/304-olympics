@@ -1,6 +1,5 @@
 import React from "react";
 import olympic from "../olympic1.jpg";
-import ReactDOM from "react-dom";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -31,6 +30,8 @@ export default class Main extends React.Component {
       name: "",
       country: "",
       athlete_id: "",
+      minage: "",
+      maxage: "",
     };
     this.ageChange = this.ageChange.bind(this);
     this.sexChange = this.sexChange.bind(this);
@@ -42,6 +43,8 @@ export default class Main extends React.Component {
     this.nameChange = this.nameChange.bind(this);
     this.countryChange = this.countryChange.bind(this);
     this.athleteIdChange = this.athleteIdChange.bind(this);
+    this.minageChange = this.minageChange.bind(this);
+    this.maxageChange = this.maxageChange.bind(this);
   }
   queryHandler = (query) => {
     console.log(query);
@@ -54,7 +57,13 @@ export default class Main extends React.Component {
         path = "http://localhost:3001/db/participant/getCountries";
         break;
       case "query3":
-        path = "http://localhost:3001/db/participant/hatachiSport";
+        console.log(this.state.minage);
+        console.log(this.state.maxage);
+        path =
+          "http://localhost:3001/db/participant/ageBetweenSport/" +
+          this.state.minage +
+          "/" +
+          this.state.maxage;
         break;
       case "query4":
         path = "http://localhost:3001/db/country/mostGoldMedals";
@@ -363,6 +372,12 @@ export default class Main extends React.Component {
   }
   athleteIdChange(event) {
     this.setState({ athlete_id: event.target.value });
+  }
+  minageChange(event) {
+    this.setState({ minage: event.target.value });
+  }
+  maxageChange(event) {
+    this.setState({ maxage: event.target.value });
   }
   isEmpty(value) {
     return value == null || value.length === 0;
@@ -699,7 +714,25 @@ export default class Main extends React.Component {
           </table>
         </div>
         <div>
-          <span> Athletes' in the age 20-30</span>
+          <div className="form-group">
+            <label htmlFor="none">Min Age</label>
+            <input
+              type="text"
+              name="minage"
+              placeholder="In number"
+              onChange={this.minageChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="none">Max Age</label>
+            <input
+              type="text"
+              name="maxage"
+              placeholder="In number"
+              onChange={this.maxageChange}
+            />
+          </div>
+          <span> Athletes between this age range</span>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
