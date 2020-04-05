@@ -244,6 +244,11 @@ export default class Main extends React.Component {
       );
     });
   }
+  deleteAthleteID = (ID) => {
+    this.setState({ athlete_id: ID });
+    console.log("delete ID", ID);
+    this.deleteAthlete();
+  };
   renderTable7() {
     var { isLoaded7, query7s } = this.state;
 
@@ -276,6 +281,15 @@ export default class Main extends React.Component {
           <td>{silver_medal_count}</td>
           <td>{bronze_medal_count}</td>
           <td>{participant_id}</td>
+          <td>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={() => this.deleteAthleteID(athlete_id)}
+            >
+              DELETE
+            </button>
+          </td>
         </tr>
       );
     });
@@ -471,20 +485,20 @@ export default class Main extends React.Component {
       });
   }
   render() {
-    if (this.props.loggedInStatus === "NOT_LOGGED_IN")
-      return (
-        <div
-          className="Main"
-          style={{
-            backgroundImage: `url(${olympic})`,
-            minHeight: "100%",
-            minWidth: "100%",
-          }}
-        >
-          <h1>OLYMPIC 2020</h1>
-          <h1>{this.props.loggedInStatus}</h1>
-        </div>
-      );
+    // if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+    //   return (
+    //     <div
+    //       className="Main"
+    //       style={{
+    //         backgroundImage: `url(${olympic})`,
+    //         minHeight: "100%",
+    //         minWidth: "100%",
+    //       }}
+    //     >
+    //       <h1>OLYMPIC 2020</h1>
+    //       <h1>{this.props.loggedInStatus}</h1>
+    //     </div>
+    //   );
     //Main Page
     return (
       <div
