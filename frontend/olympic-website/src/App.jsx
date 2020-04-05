@@ -50,6 +50,16 @@ class App extends React.Component {
             />
             <Route
               exact
+              path={"/information"}
+              render={(props) => (
+                <Information
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+            <Route
+              exact
               path={"/404"}
               render={(props) => (
                 <notFoundPage
