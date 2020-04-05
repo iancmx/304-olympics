@@ -547,7 +547,20 @@ export default class Main extends React.Component {
         </div>
         <div>
           <h1>WELCOME TO OLYMPIC 2020</h1>
-          <h3>You can search for some information about Olympic below</h3>
+          <h4>
+            The modern Olympic Games or Olympics are leading international
+            sporting events featuring summer and winter sports competitions in
+            which thousands of athletes from around the world participate in a
+            variety of competitions. The Olympic Games are considered the
+            world's foremost sports competition with more than 200 nations
+            participating. The Olympic Games are held every four years,
+            alternating between the Summer and Winter Games every two years in
+            the four-year period.
+          </h4>
+          <h3>
+            You can search for some information about Olympic this year below
+          </h3>
+          <h4>Athlete Infor</h4>
         </div>
         <div
           className="form"
